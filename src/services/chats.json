@@ -1,0 +1,171 @@
+{
+    "header": "#009933",
+    "name": "fabiomoraes.dev",
+    "start": "Olá! Digite seu nome para começar o atendimento virtual.",
+    "time": 2500,
+    "user": {
+      "name": "",
+      "phone": ""
+    },
+    "fontSize": "14px",
+    "data": [
+      {
+        "step": "welcome",
+        "message": "Seja Bem vindo",
+        "text": true,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": "name",
+        "go": "telefone",
+        "menu": []
+      },
+      {
+        "step": "telefone",
+        "message": "Deseja registrar o seu telefone?",
+        "text": false,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": [
+          {
+            "title": "SIM",
+            "icone": "check_circle",
+            "goClick": "telefoneSend"
+          },
+          {
+            "title": "NÃO",
+            "icone": "highlight_off",
+            "goClick": "navegacao"
+          }
+        ]
+      },
+      {
+        "step": "telefoneSend",
+        "message": "Digite seu telefone.",
+        "text": false,
+        "permission": false,
+        "question": "errorNumberPhone",
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": []
+      },
+      {
+        "step": "errorNumberPhone",
+        "message": "",
+        "text": false,
+        "permission": {
+          "type": "number",
+          "error": "Por favor! Preencha Novamente apenas com número o seu telefone."
+        },
+        "question": false,
+        "reverse": false,
+        "save": "telefone",
+        "go": "navegacao",
+        "menu": []
+      },
+      {
+        "step": "navegacao",
+        "message": "Escolha uma opção abaixo.",
+        "text": false,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": [
+          {
+            "title": "Fabiomoraes",
+            "icone": false,
+            "goClick": "empresa"
+          },
+          {
+            "title": "Meu GIT",
+            "icone": false,
+            "goClick": "git"
+          },
+          {
+            "title": "Linkeding",
+            "icone": false,
+            "goClick": "linkedin"
+          },
+          {
+            "title": "Sair do atendimento",
+            "icone": false,
+            "goClick": "final"
+          }
+        ]
+      },
+      {
+        "step": "empresa",
+        "message": "Fala Pessoal! Sou o Fábio Moraes, trabalho nessa área de web mais de 8 anos, comecei como desenvolvedor web (Html e layout) e fui me adaptando com outras linguagens como (PHP - Javascript - NodeJs - ReactJs - React Native). Atualmente estou trabalhando em um projeto de contabilidade para cadastro de clientes da empresa Secran Contabilidade, desenvolvendo só como back-end (PHP Laravel) e front-end (React Js).",
+        "text": false,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": [
+          {
+            "title": "Voltar o Menu",
+            "icone": false,
+            "goClick": "navegacao"
+          }
+        ]
+      },
+      {
+        "step": "git",
+        "message": "Acesso o git do chat https://github.com/fabionmoraes/react-chatbot-json",
+        "text": false,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": [
+          {
+            "title": "Voltar o Menu",
+            "icone": false,
+            "goClick": "navegacao"
+          }
+        ]
+      },
+      {
+        "step": "linkedin",
+        "message": "Adicione o meu linkedin do chat https://www.linkedin.com/in/fabionmoraes/",
+        "text": false,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": [
+          {
+            "title": "Voltar o Menu",
+            "icone": false,
+            "goClick": "navegacao"
+          }
+        ]
+      },
+      {
+        "step": "final",
+        "message": "Obrigado pelo nosso atendimento.",
+        "text": false,
+        "permission": false,
+        "question": false,
+        "reverse": false,
+        "save": false,
+        "go": false,
+        "menu": [
+          {
+            "title": "Voltar Navegação",
+            "icone": false,
+            "goClick": "navegacao"
+          }
+        ]
+      }
+    ]
+  }
