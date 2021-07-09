@@ -19,8 +19,7 @@ export const Message = styled.View<IMessageProps>`
 export const TextContainer = styled.Text<IMessageProps>`
   border-radius: 8px;
   flex-direction: column;
-  background: ${props => (props.reverse ? '#0086b3' : props.color)};
-  color: #fff;
+  background: ${props => (props.reverse ? '#fff' : props.color)};
   border-bottom-left-radius: ${props => (props.reverse ? '7px' : '16px')};
   border-bottom-right-radius: ${props => (props.reverse ? '16px' : '7px')};
   padding: 12px;
@@ -29,8 +28,8 @@ export const TextContainer = styled.Text<IMessageProps>`
   align-self: ${props => (props.reverse ? 'flex-end' : 'flex-start')};
 `;
 
-export const Text = styled.Text`
-  color: #fff;
+export const Text = styled.Text<IMessageProps>`
+  color: ${props => (props.reverse ? '#000' : '#fff')};
 `;
 
 export const FormMessage = styled.View`

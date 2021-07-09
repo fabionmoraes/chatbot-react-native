@@ -158,6 +158,10 @@ const Home: React.FC = () => {
   }
 
   const sendBtn = (reverse: boolean) => {
+    if (!messagePost) {
+      return;
+    }
+
     Keyboard.dismiss();
     const message = messagePost;
     const menu: any[] = [];
@@ -226,7 +230,7 @@ const Home: React.FC = () => {
                     <Avatar source={avatar} reverse={item.reverse} />
                     <View style={{width: width - 85}}>
                       <TextContainer reverse={item.reverse} color={json.header}>
-                        <Text>{item.message}</Text>
+                        <Text reverse={item.reverse}>{item.message}</Text>
                       </TextContainer>
 
                       {item.menu.length > 0 && (
@@ -245,7 +249,7 @@ const Home: React.FC = () => {
                                   goClick: menu.goClick,
                                 })
                               }>
-                              <Text>{menu.title}</Text>
+                              <Text reverse={item.reverse}>{menu.title}</Text>
                             </ButtonMessage>
                           ))}
                         </ScrollView>
