@@ -1,4 +1,4 @@
-Card Credit
+ChatBot React Native
 =============
 
 ![alt text](https://i.imgur.com/8TfCjvx.png)
