@@ -1,10 +1,14 @@
 import styled from '@emotion/native';
 import {RectButton} from 'react-native-gesture-handler';
 
-interface IMessageProps {
+type IMessageProps = {
   reverse: boolean;
   color?: string;
-}
+};
+
+type IButtonMessage = {
+  color: string;
+};
 
 export const Message = styled.View<IMessageProps>`
   flex-direction: ${props => (props.reverse ? 'row-reverse' : 'row')};
@@ -71,4 +75,11 @@ export const Button = styled(RectButton)`
   margin-right: 6px;
   align-items: center;
   justify-content: center;
+`;
+
+export const ButtonMessage = styled(RectButton)<IButtonMessage>`
+  background: ${props => props.color};
+  padding: 6px 16px;
+  align-self: flex-start;
+  margin-right: 5px;
 `;

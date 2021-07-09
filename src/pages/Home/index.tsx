@@ -7,6 +7,8 @@ import {
   ScrollView,
   StyleSheet,
   ActivityIndicator,
+  Animated,
+  Keyboard,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -23,6 +25,7 @@ import {
   Button,
   InputContainer,
   Avatar,
+  ButtonMessage,
 } from './styles';
 
 type IData = {
@@ -35,6 +38,11 @@ type IData = {
   save: any;
   go: any;
   menu: any[];
+};
+
+type IGoClick = {
+  text: string;
+  goClick: string;
 };
 
 interface Iposts {
@@ -55,13 +63,24 @@ const Home: React.FC = () => {
   const [posts, setPosts] = useState<Iposts[]>([] as Iposts[]);
   const [messagePost, setMessagePost] = useState('');
   const [loading, setLoading] = useState(true);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scrollViewRef = useRef<any>(null);
 
-  const messagesEndRef = useRef(null);
   const width = Dimensions.get('window').width;
 
   const jsondata: IData[] = json.data;
 
+  function animatedOn() {
+    Animated.timing(fadeAnim, {
+      useNativeDriver: false,
+      toValue: 1,
+      duration: 600,
+    }).start();
+  }
+
   function start() {
+    animatedOn();
+
     const message = json.start;
     const reverse = false;
     const menu: any = [];
@@ -85,11 +104,11 @@ const Home: React.FC = () => {
       const number = isNaN(data.message);
 
       if (chats.permission?.type === 'number' && number) {
-        const messege = chats.permission.error;
+        const message = chats.permission.error;
         const reverse = chats.reverse;
         const menu = chats.menu;
 
-        const setDados = {messege, reverse, menu};
+        const setDados = {message, reverse, menu};
 
         setPosts((state: any[]) => [...state, setDados]);
         setLoading(false);
@@ -134,10 +153,12 @@ const Home: React.FC = () => {
       setPage(chats.go);
     }
 
+    animatedOn();
     setLoading(false);
   }
 
   const sendBtn = (reverse: boolean) => {
+    Keyboard.dismiss();
     const message = messagePost;
     const menu: any[] = [];
 
@@ -152,7 +173,7 @@ const Home: React.FC = () => {
     }, json.time);
   };
 
-  const btnClick = (data: any) => {
+  const btnClick = (data: IGoClick) => {
     const message = data.text;
     const reverse = true;
     const menu: any = [];
@@ -174,7 +195,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     setStep('welcome');
     setTimeout(start, json.time);
-  }, []);
+  }, []); //eslint-disable-line
 
   useEffect(() => {
     if (page) {
@@ -188,25 +209,56 @@ const Home: React.FC = () => {
       <ImageBackground
         source={require('../../assets/bg.jpg')}
         style={styles.image}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {posts.map((item, index) => {
-            const avatar = item.reverse
-              ? require('../../assets/semavatar.png')
-              : require('../../assets/fabiomoraes.jpg');
-            return (
-              <Message key={index} reverse={item.reverse}>
-                <Avatar source={avatar} reverse={item.reverse} />
-                <View style={{width: width - 85}}>
-                  <TextContainer reverse={item.reverse} color={json.header}>
-                    <Text>{item.message}</Text>
-                  </TextContainer>
-                </View>
-              </Message>
-            );
-          })}
+        <View style={styles.scroll}>
+          <ScrollView
+            style={{flex: 1, marginBottom: 48}}
+            ref={scrollViewRef}
+            onContentSizeChange={() =>
+              scrollViewRef.current.scrollToEnd({animated: true})
+            }>
+            {posts.map((item, index) => {
+              const avatar = item.reverse
+                ? require('../../assets/semavatar.png')
+                : require('../../assets/fabiomoraes.jpg');
+              return (
+                <Animated.View key={index} style={{opacity: fadeAnim}}>
+                  <Message reverse={item.reverse}>
+                    <Avatar source={avatar} reverse={item.reverse} />
+                    <View style={{width: width - 85}}>
+                      <TextContainer reverse={item.reverse} color={json.header}>
+                        <Text>{item.message}</Text>
+                      </TextContainer>
 
-          {loading && <ActivityIndicator size="small" color="#4d4d4d" />}
-        </ScrollView>
+                      {item.menu.length > 0 && (
+                        <ScrollView
+                          horizontal
+                          showsHorizontalScrollIndicator={false}
+                          style={{flexDirection: 'row', paddingTop: 6}}>
+                          {item.menu.map((menu, index) => (
+                            <ButtonMessage
+                              key={index}
+                              style={{borderRadius: 8}}
+                              color={menu.color}
+                              onPress={() =>
+                                btnClick({
+                                  text: menu.title,
+                                  goClick: menu.goClick,
+                                })
+                              }>
+                              <Text>{menu.title}</Text>
+                            </ButtonMessage>
+                          ))}
+                        </ScrollView>
+                      )}
+                    </View>
+                  </Message>
+                </Animated.View>
+              );
+            })}
+
+            {loading && <ActivityIndicator size="small" color="#4d4d4d" />}
+          </ScrollView>
+        </View>
       </ImageBackground>
 
       <FormMessage>
@@ -240,6 +292,11 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'cover',
+  },
+  scroll: {
+    paddingTop: 12,
+    paddingBottom: 12,
+    flex: 1,
   },
 });
 

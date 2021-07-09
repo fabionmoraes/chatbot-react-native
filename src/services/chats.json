@@ -33,11 +33,13 @@
           {
             "title": "SIM",
             "icone": "check_circle",
+            "color": "#00b300",
             "goClick": "telefoneSend"
           },
           {
             "title": "NÃO",
             "icone": "highlight_off",
+            "color": "#ff3333",
             "goClick": "navegacao"
           }
         ]
@@ -59,7 +61,7 @@
         "text": false,
         "permission": {
           "type": "number",
-          "error": "Por favor! Preencha Novamente apenas com número o seu telefone."
+          "error": "Por favor! Preencha Novamente apenas com número do seu telefone."
         },
         "question": false,
         "reverse": false,
@@ -80,21 +82,25 @@
           {
             "title": "Fabiomoraes",
             "icone": false,
+            "color": "#00b300",
             "goClick": "empresa"
+          },
+          {
+            "title": "Linkedin",
+            "icone": false,
+            "color": "#00b300",
+            "goClick": "linkedin"
           },
           {
             "title": "Meu GIT",
             "icone": false,
+            "color": "#00b300",
             "goClick": "git"
-          },
-          {
-            "title": "Linkeding",
-            "icone": false,
-            "goClick": "linkedin"
           },
           {
             "title": "Sair do atendimento",
             "icone": false,
+            "color": "#00b300",
             "goClick": "final"
           }
         ]
@@ -112,6 +118,7 @@
           {
             "title": "Voltar o Menu",
             "icone": false,
+            "color": "#00b300",
             "goClick": "navegacao"
           }
         ]
@@ -129,6 +136,7 @@
           {
             "title": "Voltar o Menu",
             "icone": false,
+            "color": "#00b300",
             "goClick": "navegacao"
           }
         ]
@@ -146,6 +154,7 @@
           {
             "title": "Voltar o Menu",
             "icone": false,
+            "color": "#00b300",
             "goClick": "navegacao"
           }
         ]
@@ -163,6 +172,7 @@
           {
             "title": "Voltar Navegação",
             "icone": false,
+            "color": "#00b300",
             "goClick": "navegacao"
           }
         ]
